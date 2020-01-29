@@ -18,7 +18,7 @@ private:
 	char** OPC;
 	bool debugMode = false;
 
-
+	//Loads productions file
 	bool LoadProductions(string _filename) {
 			fstream productionsFile;
 			productionsFile.open(_filename);
@@ -53,7 +53,8 @@ private:
 				return false;
 			}
 	}
-
+	
+	//Loads Keymapfile that contains the grammar mappings 
 	bool LoadKeyMap(string _filename) {
 		fstream KeyMapFile;
 		KeyMapFile.open(_filename);
@@ -88,7 +89,8 @@ private:
 
 		return true;
 	}
-
+	
+	//Loads the OPC Table from a file
 	void LoadOPC(string _filename) {
 
 		fstream OPCFile;
@@ -136,7 +138,7 @@ private:
 
 	}
 
-
+	//Returns the value of the given to token
 	string GetTokenValue(CToken _token){
 		if (_token.tokenValueName() == "integer") {
 			return _token.tokenValueName();
@@ -179,12 +181,18 @@ public:
 
 	CBUParser(string _productionFileName, string _keyMapFileName, string _OPCFile, bool _debugMode = false)
 	{
+		//Load all the files needed to memory
+		
+		/*If debugMode is set to true, additional print statements 
+		will be outputted containing the current state of the Parser*/
+		
 		debugMode = _debugMode;
 		LoadProductions(_productionFileName);
 		LoadKeyMap(_keyMapFileName);
 		LoadOPC(_OPCFile);
 	}
-
+	
+	//Parses one token
 	bool Parse(CToken _incomingToken, bool empty = false) {
 		string tokenValue;
 		if (empty) {
@@ -278,8 +286,6 @@ public:
 					{
 						toPutOnString = "0" + toPutOnString;
 					}
-
-					//here is the problem
 					
 					if (stack.size() > 0) {
 						size = stack.top().size();
@@ -296,8 +302,6 @@ public:
 					else {
 						stack.push(toPutOnString);
 					}
-
-					/////////////////////
 					
 					
 					if (debugMode) {
