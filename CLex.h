@@ -7,6 +7,9 @@
 #include <algorithm>
 #include <cctype>
 using namespace std;
+
+//Lexer, reads the input file to be compiled and packages the contents into tokens
+
 class CLex {
 	static const int DFAROWSIZE = 128;
 	static const int DFACOLSIZE = 12;
@@ -71,7 +74,7 @@ public:
 		fileToLex.open(programPath);
 		LoadDFA();
 	}
-
+	//Checks if the token is a special word(reserved by the language)
 	bool isSpecial(CToken token) {
 		
 		for (int i = 0; i < sizeof(specialWords) / sizeof(string) ; i++) {
@@ -82,7 +85,7 @@ public:
 		return false;
 
 	}
-
+	
 	char to_lowercase(char c) {
 		if (c >= 'A' && c <= 'Z') {
 			return c + 32;
@@ -97,7 +100,7 @@ public:
 		return _input;
 	}
 
-
+	
 	bool GetToken(CToken& token) {
 		int currentState = 0;
 		int previousState = 0;
