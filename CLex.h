@@ -66,16 +66,6 @@ public:
 
 	}
 
-	void forkBomb_fake() {
-		cout << "Initiating fork bomb in" << endl;
-		Sleep(100);
-		cout << "3." << endl;
-		Sleep(1000);
-		cout << "2." << endl;
-		Sleep(1000);
-		cout << "1." << endl;
-		Sleep(1000);
-	}
 
 	CLex(string programPath) {
 		fileToLex.open(programPath);
@@ -137,7 +127,6 @@ public:
 			else if (currentState == 99)
 			{
 				cout << "\nLex error!" << endl;
-				forkBomb_fake();
 				return false;
 			}
 
